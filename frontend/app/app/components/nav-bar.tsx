@@ -41,7 +41,7 @@ const NavBar = () => {
           <NavLink
             to={route.path}
             className={({ isActive, isPending, isTransitioning }) =>
-              [isActive ? "" : "opacity-50"].join(" ")
+              [isActive ? "" : "opacity-50"].join("")
             }
           >
             {route.name}
