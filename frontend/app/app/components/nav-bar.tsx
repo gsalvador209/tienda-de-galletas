@@ -1,5 +1,6 @@
 import { ShoppingCart, UserIcon } from "lucide-react";
 import Logo from "./logo";
+import { Link, NavLink } from "react-router";
 
 interface Route {
   name: string;
@@ -7,6 +8,10 @@ interface Route {
 }
 
 const routes: Route[] = [
+  {
+    name: "Home",
+    path: "/",
+  },
   {
     name: "Galletas",
     path: "/galletas",
@@ -29,9 +34,18 @@ const NavBar = () => {
   return (
     <div className="flex gap-x-1 w-full h-16 items-center justify-between px-10 shadow-sm">
       <div className="flex gap-x-10 items-center">
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
         {routes.map((route) => (
-          <p>{route.name}</p>
+          <NavLink
+            to={route.path}
+            className={({ isActive, isPending, isTransitioning }) =>
+              [isActive ? "" : "opacity-50"].join(" ")
+            }
+          >
+            {route.name}
+          </NavLink>
         ))}
       </div>
       <div className="flex gap-x-5">
