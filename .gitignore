@@ -1,0 +1,39 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+dist/
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Docker
+*.log
+*.pid
+*.gz
+.docker/
+
+# Logs de contenedores Docker
+docker-compose*.yml
+
+# Entornos virtuales de Python
+venv/
+env/
+
+# Base de datos
+*.sql
+
+# Archivos generados por el IDE
+.vscode/
+.idea/
+*.iml
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de configuraciones locales
+.env
