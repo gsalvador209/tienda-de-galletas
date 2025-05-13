@@ -24,10 +24,6 @@ const routes: Route[] = [
     name: "Cupcakes",
     path: "/cupcakes",
   },
-  {
-    name: "Contacto",
-    path: "/contacto",
-  },
 ];
 
 const NavBar = () => {

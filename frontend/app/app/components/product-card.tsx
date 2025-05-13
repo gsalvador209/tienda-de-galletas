@@ -7,7 +7,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   return (
-    <div className="w-[50%] md:w-[80%] xl:w-[60%]">
+    <div className="w-[50%] md:w-[80%] xl:w-[70%]">
       <a
         key={product.id}
         href={product.id}

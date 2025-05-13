@@ -1,7 +1,6 @@
-import { Button } from "@/components/ui/button";
 import type { Route } from "./+types/home";
 import ProductGallery from "@/components/product-gallery";
-import { testProduct } from "@/lib/testdata";
+import { testProduct, testProductList } from "@/lib/testdata";
 import type { Product } from "@/lib/types";
 
 export function meta({}: Route.MetaArgs) {
@@ -13,7 +12,7 @@ export default function Home() {
 
   return (
     <main>
-      <ProductGallery products={testProducts} />
+      <ProductGallery products={testProductList} />
     </main>
   );
 }
