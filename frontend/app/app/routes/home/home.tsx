@@ -8,8 +8,6 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  const testProducts: Product[] = Array(25).fill(testProduct);
-
   return (
     <main>
       <ProductGallery products={testProductList} />
