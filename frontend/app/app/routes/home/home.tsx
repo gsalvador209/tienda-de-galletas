@@ -1,14 +1,19 @@
 import { Button } from "@/components/ui/button";
 import type { Route } from "./+types/home";
+import ProductGallery from "@/components/product-gallery";
+import { testProduct } from "@/lib/testdata";
+import type { Product } from "@/lib/types";
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Home" }];
 }
 
 export default function Home() {
+  const testProducts: Product[] = Array(25).fill(testProduct);
+
   return (
     <main>
-      <Button>Click</Button>
+      <ProductGallery products={testProducts} />
     </main>
   );
 }
