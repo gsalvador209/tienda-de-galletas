@@ -37,8 +37,9 @@ const NavBar = () => {
         <Link to="/">
           <Logo />
         </Link>
-        {routes.map((route) => (
+        {routes.map((route, index) => (
           <NavLink
+            key={index}
             to={route.path}
             className={({ isActive, isPending, isTransitioning }) =>
               [isActive ? "" : "opacity-50"].join("")

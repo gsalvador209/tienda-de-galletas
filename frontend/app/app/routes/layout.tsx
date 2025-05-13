@@ -1,12 +1,15 @@
+import ImagesBanner from "@/components/images-banner";
 import NavBar from "@/components/nav-bar";
-import React from "react";
 import { Outlet } from "react-router";
 
 export default function Home() {
   return (
-    <main>
-      <NavBar />
-      <Outlet />
+    <main className="flex justify-center">
+      <div className="">
+        <NavBar />
+        <ImagesBanner />
+        <Outlet />
+      </div>
     </main>
   );
 }
