@@ -45,7 +45,7 @@ const NavBar = () => {
               [isActive ? "" : "opacity-50"].join("")
             }
           >
-            {route.name}
+            <span className="font-chewy text-lg">{route.name}</span>
           </NavLink>
         ))}
       </div>
