@@ -1,6 +1,7 @@
-import { ShoppingCart, UserIcon } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import Logo from "./logo";
 import { Link, NavLink } from "react-router";
+import LoginSheet from "./login-sheet";
 
 interface Route {
   name: string;
@@ -47,7 +48,7 @@ const NavBar = () => {
       </div>
       <div className="flex gap-x-5">
         <ShoppingCart className="size-5" />
-        <UserIcon className="size-5" />
+        <LoginSheet />
       </div>
     </div>
   );
