@@ -1,4 +1,3 @@
-import { ShoppingCart } from "lucide-react";
 import Logo from "./logo";
 import { Link, NavLink } from "react-router";
 import LoginSheet from "./login-sheet";
@@ -30,7 +29,7 @@ const routes: Route[] = [
 
 const NavBar = () => {
   return (
-    <div className="flex gap-x-1 w-full h-16 items-center justify-between px-10 shadow-sm">
+    <div className="flex gap-x-1 w-full h-16 items-center justify-between px-10 shadow-sm sticky top-0 z-50 bg-background">
       <div className="flex gap-x-10 items-center">
         <Link to="/">
           <Logo />
