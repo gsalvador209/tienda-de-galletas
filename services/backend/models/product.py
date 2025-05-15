@@ -11,7 +11,8 @@ class Product(db.Model):
     description = db.Column(db.Text, nullable=True)         # Descripción opcional
     price = db.Column(db.Numeric(10, 2), nullable=False)    # Precio con 2 decimales
     stock = db.Column(db.Integer, default=0)                # Cantidad en inventario
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    image_url = db.Column(db.String(),nullable=True)        # Imagen de referencia
+    created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(
         db.DateTime,
         default=datetime.now(),
@@ -26,6 +27,7 @@ class Product(db.Model):
             'description': self.description,
             'price': float(self.price),
             'stock': self.stock,
+            'image_url' : self.image_url,
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat()
         }
