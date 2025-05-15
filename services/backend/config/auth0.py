@@ -10,7 +10,19 @@ ALGORITHMS = ["RS256"]
 def requires_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        token = request.headers.get('Authorization', None)
-        # aquí validas el JWT con jose
+        #Bypass la autenticación
+        if os.getenv("DISABLE_AUTH","false").lower() == "true":
+            return f(*args, **kwargs)
+        
+        auth_header = request.headers.get('Authorization', None)
+        if not auth_header:
+            return jsonify({"msg": "Missing Authorization Header"}), 401
+
+        token = auth_header.split()[1]
+        
+        #Payload (no se que sea eso)
+
         return f(*args, **kwargs)
+
+
     return decorated
