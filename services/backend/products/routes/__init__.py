@@ -17,7 +17,18 @@ def create_product():
     db.session.commit()
     return jsonify(p.to_dict()), 201
 
-@products_bp.route('/<init:id>', methods = ['PUT'])
+@products_bp.route('/<int:id>', methods = ['GET'])
+def get_product(id):
+    """
+    Devuelve el producto específico o 404 si no existe
+    """
+    product = Product.query.get(id)
+    if not product:
+        abort(404, description = f"Producto con el id {id} no existe.")
+    return jsonify(product.to_dict()), 200
+
+
+@products_bp.route('/<int:id>', methods = ['PUT'])
 def update_product(id):
     """
     Actualiza un producto existente.
@@ -34,7 +45,6 @@ def update_product(id):
             setattr(product, field, data[field])
     
     db.session.commit()
-
     return jsonify(product.to_dict()), 200
 
 @products_bp.route('/<int:id>', methods = ['DELETE'])
