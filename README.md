@@ -87,6 +87,8 @@ tienda-de-galletas/
 ├── README.md                     # ← ¡Tú estás aquí!
 └── package.json
 
+```
+
 👥 Equipo & Roles
 Integrante	Rol / Responsabilidad
 Chava	Backend Productos (Flask + MySQL)
