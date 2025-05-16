@@ -2,12 +2,20 @@
 
 from datetime import datetime
 from config.database import db
+from sqlalchemy import Enum
+import enum
 
+class ProductType(enum.Enum):
+    cupcake = "cupcake"
+    galleta = "galleta"
+    pastel = "pastel"
+    
 class Product(db.Model):
     __tablename__ = 'products' #Nombre de la tabla en MySQL
 
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     name = db.Column(db.String(100), nullable = False) 
+    type = db.Column(Enum(ProductType, name="producttype"), nullable = False)
     description = db.Column(db.Text, nullable=True)         # Descripción opcional
     price = db.Column(db.Numeric(10, 2), nullable=False)    # Precio con 2 decimales
     stock = db.Column(db.Integer, default=0)                # Cantidad en inventario
@@ -24,6 +32,7 @@ class Product(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'type': self.type.value,
             'description': self.description,
             'price': float(self.price),
             'stock': self.stock,

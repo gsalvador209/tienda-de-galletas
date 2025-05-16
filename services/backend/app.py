@@ -7,6 +7,7 @@ from flask import Flask
 from config.database import init_db
 from products.routes import products_bp
 from auth.routes import auth_bp
+import os
 
 def create_app():
     app = Flask(__name__)
@@ -24,4 +25,4 @@ def create_app():
     return app
 
 if __name__ == "__main__":
-    create_app().run(host='0.0.0.0', port=5000)
+    create_app().run(host='0.0.0.0', port=os.getenv("PORT"))

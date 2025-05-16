@@ -3,6 +3,7 @@ import pytest
 from app import create_app
 from config.database import db
 from models.product import Product
+from models.product import ProductType
 
 @pytest.fixture
 def app():
@@ -25,8 +26,8 @@ def client(app):
 def seeded_products(app):
     #Inserción de dos productos pra GET, PUT y DELETE
     products = [
-        Product(name = "Test A", description = "Desc A", price =1.0, stock = 10, image_url =  "urlA"),
-        Product(name = "Test B", description = "Desc B", price = 2.0, stock = 20, image_url = "urlB")
+        Product(name = "Test A", type=ProductType.cupcake, description = "Desc A", price =1.0, stock = 10, image_url =  "urlA"),
+        Product(name = "Test B", type=ProductType.galleta, description = "Desc B", price = 2.0, stock = 20, image_url = "urlB")
     ]
 
     #1.Se abre el contexto de la app
@@ -64,6 +65,7 @@ def test_get_products_with_data(client, seeded_products):
 def test_create_product(client):
     new_product = {
         "name" : "Cookie Test",
+        "type" : ProductType.cupcake.value,
         "description" : "Deliciosamente a prueba",
         "price" : 333.33,
         "stock" : 777,
