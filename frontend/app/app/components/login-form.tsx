@@ -5,17 +5,24 @@ import { z } from "zod";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
+import { useContext } from "react";
+import { UserContext } from "@/providers/user-provider";
 
 const formSchema = z.object({
-  email: z.string().min(1, {
-    message: "Ingrese un correo electrónico válido",
-  }),
+  email: z
+    .string()
+    .min(1, {
+      message: "Ingrese un correo electrónico válido",
+    })
+    .email("Ingrese un correo electrónico válido"),
   password: z.string().min(1, {
     message: "Ingrese su contraseña",
   }),
 });
 
 const LoginForm = () => {
+  const { setUser } = useContext(UserContext)!;
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -24,9 +31,22 @@ const LoginForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    //enviar a backend
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_BASE_URL}/auth/login`,
+        {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const jsonResponse = await response.json();
+      console.log(jsonResponse);
+    } catch {}
   };
   return (
     <div className="p-4">
