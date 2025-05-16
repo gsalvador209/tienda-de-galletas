@@ -16,6 +16,7 @@ jobs:
 
       - name: cd into directory
         run: |
+          ls
           cd services/backend
 
       - name: Set up Python
