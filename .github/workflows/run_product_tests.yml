@@ -9,7 +9,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    env:
+      ENABLE_CORS: "false"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

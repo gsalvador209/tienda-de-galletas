@@ -15,7 +15,8 @@ import os
 def create_app():
     app = Flask(__name__)
     app.config.from_prefixed_env() #Lee variables que empiezan con FLASK
-    CORS(app, origins=[os.getenv("FRONTEND_URL")]) #Configura CORS para poder recibir requests del frontend
+    if os.getenv("ENABLE_CORS", "true") == "true":        
+        CORS(app, origins=[os.getenv("FRONTEND_URL")]) #Configura CORS para poder recibir requests del frontend
     
     bcrypt.init_app(app)
     
