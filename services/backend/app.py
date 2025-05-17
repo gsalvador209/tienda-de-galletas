@@ -7,11 +7,18 @@ from flask import Flask
 from config.database import init_db
 from products.routes import products_bp
 from auth.routes import auth_bp
+from extensions import bcrypt
+from flask_cors import CORS
+
 import os
 
 def create_app():
     app = Flask(__name__)
     app.config.from_prefixed_env() #Lee variables que empiezan con FLASK
+    CORS(app, origins=[os.getenv("FRONTEND_URL")]) #Configura CORS para poder recibir requests del frontend
+    
+    bcrypt.init_app(app)
+    
     init_db(app)
 
     #Registro de blueprints
