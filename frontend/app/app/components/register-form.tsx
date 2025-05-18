@@ -9,23 +9,30 @@ import { useContext, useState } from "react";
 import { UserContext } from "@/providers/user-provider";
 import { CircleAlertIcon } from "lucide-react";
 
-interface LoginFormProps {
-  onRegisterClick: () => void;
+interface RegisterFormProps {
+  onLoginClick: () => void;
 }
 
-const formSchema = z.object({
-  email: z
-    .string()
-    .min(1, {
-      message: "Ingrese un correo electrónico válido",
-    })
-    .email("Ingrese un correo electrónico válido"),
-  password: z.string().min(1, {
-    message: "Ingrese su contraseña",
-  }),
-});
+const formSchema = z
+  .object({
+    name: z.string().min(1, { message: "El nombre es requerido" }),
+    email: z
+      .string()
+      .min(1, {
+        message: "Ingrese un correo electrónico válido",
+      })
+      .email("Ingrese un correo electrónico válido"),
+    password: z.string().min(1, {
+      message: "Ingrese su contraseña",
+    }),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Las constraseñas no coinciden",
+    path: ["confirmPassword"],
+  });
 
-const LoginForm = ({ onRegisterClick }: LoginFormProps) => {
+const RegisterForm = ({ onLoginClick }: RegisterFormProps) => {
   const { setUser } = useContext(UserContext)!;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -33,8 +40,10 @@ const LoginForm = ({ onRegisterClick }: LoginFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
@@ -43,7 +52,7 @@ const LoginForm = ({ onRegisterClick }: LoginFormProps) => {
       setIsLoading(true);
       setError(null);
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_BASE_URL}/auth/login`,
+        `${import.meta.env.VITE_BACKEND_BASE_URL}/auth/register`,
         {
           method: "POST",
           body: JSON.stringify(values),
@@ -53,15 +62,13 @@ const LoginForm = ({ onRegisterClick }: LoginFormProps) => {
         }
       );
 
-      if (response.status == 401) {
-        setError("Credenciales inválidas");
-        return;
-      } else if (response.status == 500) {
+      if (response.status == 500) {
         setError("Error del servidor");
       }
 
       const jsonResponse = await response.json();
-      setUser(jsonResponse);
+      const { id, name, email } = jsonResponse;
+      setUser({ id, name, email });
       location.reload();
     } catch {
     } finally {
@@ -70,9 +77,23 @@ const LoginForm = ({ onRegisterClick }: LoginFormProps) => {
   };
   return (
     <div className="p-4">
-      <span className="text-xl font-chewy">Inicia Sesión</span>
+      <span className="text-xl font-chewy">Registrate</span>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="mt-5">
+                  <Label className="font-chewy">Nombre</Label>
+                </FormLabel>
+                <Input placeholder="John Doe" {...field} disabled={isLoading} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <FormField
             control={form.control}
             name="email"
@@ -109,13 +130,32 @@ const LoginForm = ({ onRegisterClick }: LoginFormProps) => {
               </FormItem>
             )}
           />
+
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="mt-5">
+                  <Label className="font-chewy">Confirmar contraseña</Label>
+                </FormLabel>
+                <Input
+                  placeholder="•••••••••"
+                  {...field}
+                  type="password"
+                  disabled={isLoading}
+                />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           {error && (
             <div className="w-full bg-destructive/20 p-4 mt-4 text-destructive rounded-md flex justify-start items-center gap-x-4">
               <CircleAlertIcon className="size-4" />
               {error}
             </div>
           )}
-
           <Button
             type="submit"
             className="w-full mt-10 font-chewy"
@@ -129,9 +169,9 @@ const LoginForm = ({ onRegisterClick }: LoginFormProps) => {
               type="button"
               variant="link"
               className="text-black"
-              onClick={onRegisterClick}
+              onClick={onLoginClick}
             >
-              Registrarse
+              Iniciar Sesión
             </Button>
           </div>
         </form>
@@ -140,4 +180,4 @@ const LoginForm = ({ onRegisterClick }: LoginFormProps) => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
