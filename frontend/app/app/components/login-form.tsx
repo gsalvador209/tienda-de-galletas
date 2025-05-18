@@ -5,8 +5,9 @@ import { z } from "zod";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "@/providers/user-provider";
+import { CircleAlertIcon } from "lucide-react";
 
 const formSchema = z.object({
   email: z
@@ -22,6 +23,8 @@ const formSchema = z.object({
 
 const LoginForm = () => {
   const { setUser } = useContext(UserContext)!;
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -33,6 +36,8 @@ const LoginForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      setIsLoading(true);
+      setError(null);
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_BASE_URL}/auth/login`,
         {
@@ -44,9 +49,19 @@ const LoginForm = () => {
         }
       );
 
+      if (response.status == 401) {
+        setError("Credenciales inválidas");
+        return;
+      } else if (response.status == 500) {
+        setError("Error del servidor");
+      }
+
       const jsonResponse = await response.json();
       console.log(jsonResponse);
-    } catch {}
+    } catch {
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <div className="p-4">
@@ -61,7 +76,11 @@ const LoginForm = () => {
                 <FormLabel className="mt-5">
                   <Label className="font-chewy">Correo electrónico</Label>
                 </FormLabel>
-                <Input placeholder="correo@mail.com" {...field} />
+                <Input
+                  placeholder="correo@mail.com"
+                  {...field}
+                  disabled={isLoading}
+                />
                 <FormMessage />
               </FormItem>
             )}
@@ -75,12 +94,27 @@ const LoginForm = () => {
                 <FormLabel className="mt-5">
                   <Label className="font-chewy">Contraseña</Label>
                 </FormLabel>
-                <Input placeholder="•••••••••" {...field} type="password" />
+                <Input
+                  placeholder="•••••••••"
+                  {...field}
+                  type="password"
+                  disabled={isLoading}
+                />
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full mt-10 font-chewy">
+          {error && (
+            <div className="w-full bg-destructive/20 p-4 mt-4 text-destructive rounded-md flex justify-start items-center gap-x-4">
+              <CircleAlertIcon className="size-4" />
+              {error}
+            </div>
+          )}
+          <Button
+            type="submit"
+            className="w-full mt-10 font-chewy"
+            disabled={isLoading}
+          >
             Ingresar
           </Button>
         </form>
