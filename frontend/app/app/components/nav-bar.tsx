@@ -1,6 +1,6 @@
 import Logo from "./logo";
 import { Link, NavLink } from "react-router";
-import LoginSheet from "./login-sheet";
+import ProfileSheet from "./profile-sheet";
 import CartSheet from "./cart-sheet";
 
 interface Route {
@@ -48,7 +48,7 @@ const NavBar = () => {
       </div>
       <div className="flex gap-x-5">
         <CartSheet />
-        <LoginSheet />
+        <ProfileSheet />
       </div>
     </div>
   );

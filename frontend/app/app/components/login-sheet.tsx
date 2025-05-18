@@ -1,11 +1,14 @@
 import { UserIcon } from "lucide-react";
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./ui/sheet";
-import LoginForm from "./login-form";
+import { SheetContent, SheetHeader, SheetTrigger } from "./ui/sheet";
 import Logo from "./logo";
+import LoginForm from "./login-form";
+import RegisterForm from "./register-form";
+import { useState } from "react";
 
 const LoginSheet = () => {
+  const [tab, setTab] = useState<"register" | "login">("login");
   return (
-    <Sheet>
+    <>
       <SheetTrigger>
         <UserIcon className="size-5" />
       </SheetTrigger>
@@ -13,9 +16,13 @@ const LoginSheet = () => {
         <SheetHeader className="font-bold text-lg">
           <Logo />
         </SheetHeader>
-        <LoginForm />
+        {tab === "login" ? (
+          <LoginForm onRegisterClick={() => setTab("register")} />
+        ) : (
+          <RegisterForm onLoginClick={() => setTab("login")} />
+        )}
       </SheetContent>
-    </Sheet>
+    </>
   );
 };
 
