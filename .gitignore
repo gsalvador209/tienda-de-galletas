@@ -37,3 +37,7 @@ Thumbs.db
 
 # Archivos de configuraciones locales
 .env
+
+#archivos no homogeneos entre SOs
+*/:memory:
+
