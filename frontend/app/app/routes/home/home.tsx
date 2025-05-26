@@ -17,10 +17,11 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const API = import.meta.env.VITE_BACKEND_BASE_URL;
   // 2) useEffect para ejecutar la petición al montar el componente
   useEffect(() => {
     // ruta relativa: el proxy Nginx la reenviará a http://backend:8000/products
-    fetch("/products")
+    fetch(`${API}/products`)
       .then(res => {
         // 2.a) Verificar que la respuesta sea exitosa (status 2xx)
         if (!res.ok) {

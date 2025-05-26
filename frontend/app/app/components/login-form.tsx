@@ -45,7 +45,7 @@ const LoginForm = ({ onRegisterClick }: LoginFormProps) => {
       setIsLoading(true);
       setError(null);
       const response = await fetch(
-        `/auth/login`,
+        `{API}/auth/login`,
         {
           method: "POST",
           body: JSON.stringify(values),

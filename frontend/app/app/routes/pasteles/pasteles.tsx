@@ -11,8 +11,12 @@ export default function PastelesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const API = import.meta.env.VITE_BACKEND_BASE_URL;
+
   useEffect(() => {
-    fetch("/products")
+
+
+    fetch(`${API}/products`)
       .then(res => {
         if (!res.ok) throw new Error(`Error HTTP ${res.status}`);
         return res.json();
