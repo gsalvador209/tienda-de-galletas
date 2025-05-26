@@ -17,7 +17,7 @@ export default function CupcakesPage() {
 
   // 2) Al montar, solicitamos todos los productos y luego filtramos por type === "cupcake"
   useEffect(() => {
-    fetch(`${API}/products`)
+    fetch(`${API}/products/`)
       .then(res => {
         if (!res.ok) throw new Error(`Error HTTP ${res.status}`);
         return res.json();

@@ -16,7 +16,7 @@ export default function PastelesPage() {
   useEffect(() => {
 
 
-    fetch(`${API}/products`)
+    fetch(`${API}/products/`)
       .then(res => {
         if (!res.ok) throw new Error(`Error HTTP ${res.status}`);
         return res.json();

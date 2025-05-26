@@ -21,7 +21,7 @@ export default function Home() {
   // 2) useEffect para ejecutar la petición al montar el componente
   useEffect(() => {
     // ruta relativa: el proxy Nginx la reenviará a http://backend:8000/products
-    fetch(`${API}/products`)
+    fetch(`${API}/products/`)
       .then(res => {
         // 2.a) Verificar que la respuesta sea exitosa (status 2xx)
         if (!res.ok) {
