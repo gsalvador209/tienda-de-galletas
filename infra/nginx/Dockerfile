@@ -1,13 +1,10 @@
+# Usamos la última imagen oficial de Nginx
+FROM nginx:latest 
 
-# Ruta: infra/nginx/Dockerfile
+RUN ls -la /etc/nginx/conf.d/ 
+RUN rm -f /etc/nginx/conf.d/default.conf 
+COPY nginx.conf /etc/nginx/conf.d/nginx.conf 
 
-FROM nginx:latest
+EXPOSE 80 
 
-#Elimina la configuración default de Nginx
-RUN rm /etc/nginx/conf.d/default.conf
-
-#Copia lo que programé
-COPY nginx.conf /etc/nginx/conf.de
-
-#Expone el puerto 80 que será mapeado en docker-compose
-EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"] 
