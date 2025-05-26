@@ -17,7 +17,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const API = import.meta.env.VITE_BACKEND_BASE_URL;
+  const API = "tienda-de-galletas-production.up.railway.app"
   // 2) useEffect para ejecutar la petición al montar el componente
   useEffect(() => {
     // ruta relativa: el proxy Nginx la reenviará a http://backend:8000/products

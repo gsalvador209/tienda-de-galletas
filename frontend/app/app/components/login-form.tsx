@@ -13,7 +13,7 @@ interface LoginFormProps {
   onRegisterClick: () => void;
 }
 
-const API = import.meta.env.VITE_BACKEND_BASE_URL;
+const API = "tienda-de-galletas-production.up.railway.app"
 
 const formSchema = z.object({
   email: z

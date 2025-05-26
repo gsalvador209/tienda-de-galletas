@@ -11,7 +11,7 @@ export default function GalletasPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const API = import.meta.env.VITE_BACKEND_BASE_URL;
+  const API = "tienda-de-galletas-production.up.railway.app"
 
   useEffect(() => {
     fetch(`${API}/products`)
