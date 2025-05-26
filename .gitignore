@@ -16,8 +16,7 @@ __pycache__/
 *.gz
 .docker/
 
-# Logs de contenedores Docker
-docker-compose*.yml
+
 
 # Entornos virtuales de Python
 venv/
