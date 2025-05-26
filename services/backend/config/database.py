@@ -39,6 +39,10 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
+#Base para Alembic y así usará metadata de modelos
+Base = db.Model
+
+
 #-------------------------------------------
 # Funciones de inicialización
 #-------------------------------------------
