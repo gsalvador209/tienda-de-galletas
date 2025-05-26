@@ -118,7 +118,7 @@ const LoginForm = ({ onRegisterClick }: LoginFormProps) => {
 
           <Button
             type="submit"
-            className="w-full mt-10 font-chewy"
+            className="block w-full mt-10 font-chewy bg-rose-300 hover:bg-pink-300 text-black py-2 rounded-lg text-center"
             disabled={isLoading}
           >
             Ingresar
