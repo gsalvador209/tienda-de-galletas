@@ -107,7 +107,7 @@ const Checkout = () => {
   if (products.length === 0) {
     return (
       <div className="container mx-auto p-8 text-center">
-        <h1 className="text-3xl font-bold mb-4">Checkout</h1>
+        <h1 className="text-3xl mt-10 font-chewy  mb-4">Checkout</h1>
         <p className="text-xl">Tu carrito está vacío. ¡Animate a revisar todos nuestros productos!</p>
       </div>
     );
@@ -186,7 +186,7 @@ const Checkout = () => {
             {/* --- Botón --- */}
             <Button 
                 type="submit" 
-                className="w-full bg-rose-400 hover:bg-pink-400 text-lg py-3 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="w-full mt-10 font-chewy bg-rose-300 hover:bg-pink-300 text-lg py-3 disabled:bg-gray-400 disabled:cursor-not-allowed"
                 disabled={!isFormValid} // El botón se deshabilita si el form no es válido
             >
               Confirmar y Pagar
