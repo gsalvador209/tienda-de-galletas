@@ -1,9 +1,10 @@
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTrigger, SheetClose} from "./ui/sheet";
 import Logo from "./logo";
 import CartSheetTrigger from "./cart-sheet-trigger";
 import useCartStore from "@/store/useCartStore";
 import { formatCurrency } from "@/lib/utils";
 import CartItem from "./cartItem";
+import { Link } from "react-router-dom";
 
 const CartSheet = () => { //Componente funcional, pieza reutilizable de interfaz de usuario (deberá estar en las demás secciones)
   const cart = useCartStore()
@@ -34,9 +35,15 @@ const CartSheet = () => { //Componente funcional, pieza reutilizable de interfaz
               <span>Total:</span>
               <span>{formatCurrency(cart.totalPrice())}</span>
             </div>
-            <button className="w-full bg-rose-300 hover:bg-pink-300 text-white py-2 rounded-lg"> {/* Botón simple de ejemplo */}
-              Checkout
-            </button>
+              <SheetClose asChild> 
+                <Link 
+                  to="/checkout" 
+                  // Aplica los estilos del botón DIRECTAMENTE al Link
+                  className="block w-full bg-rose-300 hover:bg-pink-300 text-white py-2 rounded-lg text-center" 
+                > 
+                  Checkout
+                </Link>
+               </SheetClose>
           </div>
         )}
       </SheetContent>

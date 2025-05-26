@@ -11,5 +11,6 @@ export default [
     route("galletas", "routes/galletas/galletas.tsx"),
     route("pasteles", "routes/pasteles/pasteles.tsx"),
     route("cupcakes", "routes/cupcakes/cupcakes.tsx"),
+    route("checkout", "components/checkout.tsx"),
   ]),
 ] satisfies RouteConfig;
