@@ -7,7 +7,7 @@ class User(db.Model):
     __tablename__ = 'users' # Tabla de usuarios “local”
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    password = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(512), nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False)
     name = db.Column(db.String(100), nullable=True)
     role = db.Column(db.String(50), default='user') #Pendiente si vale la pena porque aun no sabemos si haremos 2 vistas
