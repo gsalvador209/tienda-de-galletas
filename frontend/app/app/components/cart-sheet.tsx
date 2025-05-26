@@ -39,7 +39,7 @@ const CartSheet = () => { //Componente funcional, pieza reutilizable de interfaz
                 <Link 
                   to="/checkout" 
                   // Aplica los estilos del botón DIRECTAMENTE al Link
-                  className="block w-full bg-rose-300 hover:bg-pink-300 text-white py-2 rounded-lg text-center" 
+                  className="block w-full mt-10 font-chewy bg-rose-300 hover:bg-pink-300 text-black py-2 rounded-lg text-center" 
                 > 
                   Checkout
                 </Link>
