@@ -1,6 +1,6 @@
 import os
 import sys
-from werkzeug.security import generate_password_hash
+from extensions import bcrypt
 
 # ────────────────────────────────────────────────────────────────────────────────
 # 1) Ajuste de sys.path para que Python encuentre app, config y models
@@ -19,7 +19,8 @@ from config.database import db, init_db
 # 3) Importar SOLO tus modelos de usuario y producto
 # ────────────────────────────────────────────────────────────────────────────────
 from models.user import User           # campo 'password', 'email', 'name', 'role', created_at :contentReference[oaicite:0]{index=0}
-from models.product import Product, ProductType  # Enum y campos del producto :contentReference[oaicite:1]{index=1}
+from models.product import Product 
+
 
 # ────────────────────────────────────────────────────────────────────────────────
 # 4) Función para sembrar usuarios
@@ -32,13 +33,13 @@ def seed_users():
     sample_users = [
         {
             "email":    "alice@example.com",
-            "password": generate_password_hash("password123"),
+            "password":  bcrypt.generate_password_hash("password123").decode('utf-8'),
             "name":     "Alice",
             "role":     "user",
         },
         {
             "email":    "bob@example.com",
-            "password": generate_password_hash("secret456"),
+            "password":  bcrypt.generate_password_hash("secret456").decode('utf-8'),
             "name":     "Bob",
             "role":     "admin",
         },
