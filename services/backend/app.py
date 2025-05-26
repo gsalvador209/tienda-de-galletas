@@ -7,6 +7,7 @@ load_dotenv()  # carga .env de services/backend
 
 from config.database import db, init_db, DATABASE_URI
 from products.routes import products_bp
+from users.routes    import users_bp
 from auth.routes import auth_bp
 from extensions import bcrypt
 
@@ -31,6 +32,7 @@ def create_app():
     # 5) Blueprints
     app.register_blueprint(products_bp, url_prefix="/products")
     app.register_blueprint(auth_bp,     url_prefix="/auth")
+    app.register_blueprint(users_bp,    url_prefix="/users")
 
     @app.route("/")
     def health():

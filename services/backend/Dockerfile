@@ -14,6 +14,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
 RUN chmod +x /usr/local/bin/wait-for-it.sh
 
+
+# quitamos los \r e instalamos permiso de ejecución
+RUN sed -i 's/\r$//' /usr/local/bin/wait-for-it.sh \
+ && chmod +x /usr/local/bin/wait-for-it.sh
+
 # 5) Copia el resto del código al contenedor
 COPY . .
 
