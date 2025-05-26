@@ -60,6 +60,7 @@ services:
     build:
       context: ./infra/nginx
       dockerfile: Dockerfile
+    platform: linux/amd64 
     container_name: tienda_proxy
     depends_on:
       - frontend
