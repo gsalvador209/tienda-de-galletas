@@ -16,8 +16,7 @@ __pycache__/
 *.gz
 .docker/
 
-# Logs de contenedores Docker
-docker-compose*.yml
+
 
 # Entornos virtuales de Python
 venv/
@@ -37,3 +36,7 @@ Thumbs.db
 
 # Archivos de configuraciones locales
 .env
+
+#archivos no homogeneos entre SOs
+*/:memory:
+

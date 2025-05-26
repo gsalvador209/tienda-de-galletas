@@ -1,0 +1,72 @@
+version: "3.8"
+
+services:
+  # ——————————————————————
+  # 1) MySQL
+  # ——————————————————————
+  mysql:
+    image: mysql:8.0
+    container_name: tienda_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_PASS}"
+      MYSQL_DATABASE:      "${DB_NAME}"
+      MYSQL_USER:          "${DB_USER}"
+      MYSQL_PASSWORD:      "${DB_PASS}"
+    command:
+      - --default-authentication-plugin=mysql_native_password
+      - --host-cache-size=0
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+      - /usr/share/zoneinfo:/usr/share/zoneinfo:ro
+    ports:
+      - "3306:3306"
+
+  # ——————————————————————
+  # 2) Backend
+  # ——————————————————————
+  backend:
+    build:
+      context: ./services/backend
+      dockerfile: Dockerfile
+    container_name: tienda_backend
+    env_file:
+      - ./services/backend/.env
+    depends_on:
+      - mysql
+    ports:
+      - "8000:8000"
+
+  # ——————————————————————
+  # 3) Frontend
+  # ——————————————————————
+  frontend:
+    build:
+      context: ./frontend/app
+      dockerfile: Dockerfile
+    container_name: tienda_frontend
+    # No necesitas env_file si tu front no usa vars de tiempo de build
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+
+  # ——————————————————————
+  # 4) Proxy Inverso (Nginx)
+  # ——————————————————————
+  proxy:
+  
+    build:
+      context: ./infra/nginx
+      dockerfile: Dockerfile
+    platform: linux/amd64 
+    container_name: tienda_proxy
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  mysql_data:
