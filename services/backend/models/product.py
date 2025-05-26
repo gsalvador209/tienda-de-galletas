@@ -19,7 +19,7 @@ class Product(db.Model):
     description = db.Column(db.Text, nullable=True)         # Descripción opcional
     price = db.Column(db.Numeric(10, 2), nullable=False)    # Precio con 2 decimales
     stock = db.Column(db.Integer, default=0)                # Cantidad en inventario
-    image_url = db.Column(db.String(),nullable=True)        # Imagen de referencia
+    image_url = db.Column(db.String(512),nullable=True)        # Imagen de referencia
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(
         db.DateTime,
