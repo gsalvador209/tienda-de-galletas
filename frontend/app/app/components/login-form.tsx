@@ -13,6 +13,8 @@ interface LoginFormProps {
   onRegisterClick: () => void;
 }
 
+const API = import.meta.env.VITE_BACKEND_BASE_URL;
+
 const formSchema = z.object({
   email: z
     .string()
@@ -43,7 +45,7 @@ const LoginForm = ({ onRegisterClick }: LoginFormProps) => {
       setIsLoading(true);
       setError(null);
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_BASE_URL}/auth/login`,
+        `/auth/login`,
         {
           method: "POST",
           body: JSON.stringify(values),
