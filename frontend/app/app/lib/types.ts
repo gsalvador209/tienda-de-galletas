@@ -4,5 +4,5 @@ export interface Product {
   description: string;
   price: number;
   type: "galleta" | "cupcake" | "pastel";
-  imageUrl: string;
+  image_url: string;
 }
