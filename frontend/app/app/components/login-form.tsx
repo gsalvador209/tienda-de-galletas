@@ -13,7 +13,7 @@ interface LoginFormProps {
   onRegisterClick: () => void;
 }
 
-const API = "tienda-de-galletas-production.up.railway.app"
+const API = "https://tienda-de-galletas-production.up.railway.app"
 
 const formSchema = z.object({
   email: z

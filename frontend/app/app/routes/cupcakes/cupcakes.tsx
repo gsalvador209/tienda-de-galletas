@@ -12,7 +12,7 @@ export default function CupcakesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const API = "tienda-de-galletas-production.up.railway.app"
+  const API = "https://tienda-de-galletas-production.up.railway.app/"
 
 
   // 2) Al montar, solicitamos todos los productos y luego filtramos por type === "cupcake"
