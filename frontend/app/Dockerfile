@@ -1,29 +1,25 @@
-# Dockerfile
-# Etapa 1: Construcción
+# Stage 1 — build
 FROM node:20 AS builder
-
 WORKDIR /app
 
-# Copiamos los archivos necesarios
-COPY ./frontend/app/package*.json ./
-COPY ./frontend/app/tsconfig.json ./
-COPY ./frontend/app/vite.config.ts ./
-COPY ./frontend/app/react-router.config.ts ./
-COPY ./frontend/app ./
+# 1) Copy only package files first (cache npm install)
+COPY package*.json ./
+# 2) Copy your TS & Vite config
+COPY tsconfig.json vite.config.ts react-router.config.ts ./
+# 3) Copy the rest of your source
+COPY . .
 
-# Instalamos dependencias y construimos
+# 4) Install & build
 RUN npm install
 RUN npm run build
 
-# Etapa 2: Producción
+# Stage 2 — runtime
 FROM node:20-slim
-
 WORKDIR /app
 
-# Instalamos solo lo necesario para servir
+# 5) Grab the compiled output + node_modules
 COPY --from=builder /app /app
 
+# 6) Expose & start
 EXPOSE 3000
-
-CMD ["npm", "start"] 
-#Explicar cada linea de este archivo 
+CMD ["npm", "start"]
