@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/Stack-Python%20%7C%20Flask%20%7C%20React%20%7C%20Docker-green?style=for-the-badge" alt="Tecnologías">
 </p>
 
-# 🍪 Tienda de Galletas Distribuidas
+# 🍪 Tienda de Galletas
 
 **Cookie-Cloud** es una **plataforma de e-commerce** que distribuye productos de repostería fina en tiempo real, aprovechando **microservicios** en contenedores Docker, un **backend en Flask**, y un **frontend en React**. Está diseñada para escalar, ofrecer alta disponibilidad y asegurar una experiencia de compra ágil y confiable.
 
@@ -23,6 +23,15 @@
   3. Carrito de compras y proceso de pago  
   4. Persistencia confiable en MySQL  
   5. Orquestación completa con CI/CD para despliegue automático  
+
+---
+## 📷 Capturas
+<p align="center">
+  <img width="600" src="https://github.com/user-attachments/assets/06886c42-88e4-4834-9d3d-f5523132ccae" />
+  <img width="150" src="https://github.com/user-attachments/assets/53c64a2a-2c4c-4bb4-8bed-dd8e67b66663" />
+</p>
+<img width="1397" height="668" alt="image" src="https://github.com/user-attachments/assets/c02d5296-ffa2-4663-a59f-5e9ea8505f81" />
+<img width="1311" height="532" alt="image" src="https://github.com/user-attachments/assets/2b732242-0874-4519-93c3-63c557afc80f" />
 
 ---
 
