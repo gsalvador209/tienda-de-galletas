@@ -16,7 +16,7 @@ const CartItem: React.FC<CartItemProps> = ({ product }) => { //Pieza reutilizabl
             className="bg-white rounded-lg shadow-md p-4 mb-0 flex items-start" //Es un contenedor flex
         >
             <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200 mr-4">
-                <img alt={product.name} src={product.imageUrl} className="size-full object-cover" />
+                <img alt={product.name} src={product.image_url} className="size-full object-cover" />
             </div>
             <div className="flex-grow flex-col"//para ocupar todo el espacio del contenedor
             >

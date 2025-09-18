@@ -202,7 +202,7 @@ const Checkout = () => {
             {products.map((item) => (
               <div key={item.id} className="flex items-center justify-between border-b pb-3">
                 <div className="flex items-center">
-                   <img src={item.imageUrl} alt={item.name} className="size-16 rounded object-cover mr-4" />
+                   <img src={item.image_url} alt={item.name} className="size-16 rounded object-cover mr-4" />
                    <div>
                       <p className="font-medium">{item.name}</p>
                       <p className="text-sm text-gray-500">Cantidad: {item.amount}</p>
